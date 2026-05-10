@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Julio Nevarez
+**Student ID:** 130817489
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -17,13 +17,12 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
-
+  A single shortest path run like Dijkstras would not be enough because it only takes into consideration the total distance from a specific starting path, in our case S. But we need to be able to keep track of different starting distances from different nodes when we are mid pathing.
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+  We need to figure out what path/order to visit the relic chambers/nodes in.
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+  This requires a search over orders because we have to try and compare the cost of different routes to figure out which is more efficient.
 
 ---
 
@@ -34,7 +33,7 @@
 > List the source node types as a bullet list. For each, one-line reason.
 
 | Source Node Type | Why it is a source |
-|---|---|
+|-------------|-------------------|
 | _node type_ | _one-line reason_ |
 | _node type_ | _one-line reason_ |
 
@@ -43,7 +42,7 @@
 > Fill in the table. No prose required.
 
 | Property | Your answer |
-|---|---|
+|----------|-------------|
 | Data structure name | |
 | What the keys represent | |
 | What the values represent | |
