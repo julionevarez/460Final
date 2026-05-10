@@ -55,9 +55,9 @@ After computing cheapest inter-location travel costs, suppose you have:
 | From \ To | B   | C   | D   | T   |
 |-----------|-----|-----|-----|-----|
 | S         | 1   | 2   | 2   | --  |
-| B         | --  | 1   | 1   | 1   |
-| C         | 1   | --  | 1   | 1   |
-| D         | 1   | 1   | --  | 1 |
+| B         | --  | 100  | 1  | 1   |
+| C         | 1   | --  | 100 | 1   |
+| D         | 1   | 1   | --  | 100 |
 
 Two possible routes:
 

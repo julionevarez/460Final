@@ -136,7 +136,7 @@ _Your answer here._
 > Fill in the table.
 
 | Property | Your answer |
-|---|---|
+|----------|--------------|
 | Data structure chosen | |
 | Operation: check if relic already collected | Time complexity: |
 | Operation: mark a relic as collected | Time complexity: |
