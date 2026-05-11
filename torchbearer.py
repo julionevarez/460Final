@@ -56,9 +56,16 @@ def select_sources(spawn, relics, exit_node):
     list[node]
         No duplicates. Order does not matter.
 
-    TODO
     """
-    pass
+    # start with spawn as the first source
+    sourceList = [spawn]
+    
+    # add each relic as a source since we need distances from each one
+    for relic in relics:
+        sourceList.append(relic)
+    
+    return sourceList
+
 
 
 def run_dijkstra(graph, source):
