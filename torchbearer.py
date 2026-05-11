@@ -82,9 +82,44 @@ def run_dijkstra(graph, source):
         Minimum cost from source to every node in graph.
         Unreachable nodes map to float('inf').
 
-    TODO
     """
-    pass
+    # set every node's distance to infinity since we haven't found a path to any of them yet
+    pathCosts = {node: float('inf') for node in graph}
+    
+    # at the start we are at the source node, so the distance to it is 0
+    pathCosts[source] = 0
+    
+    # initialize priority queue to holds (cost, node) pairs, starts with just the source at cost 0
+    pq = [(0, source)]
+    
+    # declare a visitedSet to keep track of which nodes we've finalized the shortest path to
+    visitedNodes = set()
+    
+    # while the priority queue is not empty, keep exexcuting the proces
+    while pq:
+        # always grab the cheapest node available from the queue
+        currentCost, currentNode = heapq.heappop(pq)
+        
+        # if we already finalized this node we can skip it
+        # this handles the case where a node gets added to the queue multiple times
+        if currentNode in visitedNodes:
+            continue
+        
+        # mark this node as finalized, we found the cheapest path to it
+        visitedNodes.add(currentNode)
+        
+        # check all the neighbors of the current node
+        for neighbor, weight in graph[currentNode]:
+            # calculate what it would cost to reach this neighbor through the current node
+            newCost = currentCost + weight
+            
+            # if this new path is cheaper than what we have recorded, update it
+            if newCost < pathCosts[neighbor]:
+                pathCosts[neighbor] = newCost
+                # add the neighbor to the queue with its updated cost so we can explore it later
+                heapq.heappush(pq, (newCost, neighbor))
+    
+    return pathCosts
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
