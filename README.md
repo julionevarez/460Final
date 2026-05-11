@@ -33,9 +33,9 @@
 > List the source node types as a bullet list. For each, one-line reason.
 
 | Source Node Type | Why it is a source |
-|-------------|-------------------|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+|-------------------|-------------------------------------------------------------------------|
+| Entrance Node 'S' | We always begin at S so we need the cost of getting from S to any relic. |
+| Relic Node        | Once we collect a relic we need to know the cheapest way to reach the next one from that location. |
 
 ### Part 2b: Distance Storage
 
