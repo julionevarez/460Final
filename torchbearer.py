@@ -25,16 +25,18 @@ import heapq
 # =============================================================================
 
 def explain_problem():
-    """
-    Returns
-    -------
-    str
-        Your Part 1 README answers, written as a string.
-        Must match what you wrote in README Part 1.
 
-    TODO
+    answer = """
+    **Why a single shortest-path run from S is not enough:**
+        A single shortest path run like Dijkstras would not be enough because it only takes into consideration the total distance from a specific starting path, in our case S. But we need to be able to keep track of different starting distances from different nodes when we are mid pathing.
+    **What decision remains after all inter-location costs are known:**
+        We need to figure out what path/order to visit the relic chambers/nodes in.
+
+    **Why this requires a search over orders (one sentence):**
+        This requires a search over orders because we have to try and compare the cost of different routes to figure out which is more efficient.
     """
-    return "TODO"
+
+    return answer
 
 
 # =============================================================================
