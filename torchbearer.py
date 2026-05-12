@@ -160,16 +160,6 @@ def precompute_distances(graph, spawn, relics, exit_node):
 # =============================================================================
 
 def dijkstra_invariant_check():
-    """
-    Returns
-    -------
-    str
-        Your Part 3 README answers, written as a string.
-        Must match what you wrote in README Part 3.
-
-    
-    """
-
     answer = """
     - **For nodes already finalized (in S):**
         When a node gets finalized we are done with it. The distance we have recorded for it is the real shortest path and nothing can make it shorter at this point.
@@ -197,16 +187,16 @@ def dijkstra_invariant_check():
 # =============================================================================
 
 def explain_search():
-    """
-    Returns
-    -------
-    str
-        Your Part 4 README answers, written as a string.
-        Must match what you wrote in README Part 4.
+    answer = """
+    - **The failure mode:** The failure mode is that greedy commits to a locally cheap decision early on without looking ahead, which can force it into expensive choices later that a different ordering would have avoided.
+    - **Counter-example setup:** Using the illustration example and tweaking it a tiny bit. If we change the cost of S→B to cost 3 and S→C to cost 1. Everything else stays the same. Now C looks like the obvious first pick from S but leads to trouble later.
+    - **What greedy picks:** Greedy picks S→C(cost 1) first since it is the cheapest from S, then C→B(cost 1), then B→D(cost 1), then D→T(cost 100) for a total cost of 103.
+    - **What optimal picks:** Optimal picks S→B→D→C→T costing 6 by avoiding ending on D which has an expensive exit to T of 100.
+    - **Why greedy loses:** Greedy loses because it only looks at the immediate next cheapest step and has no way of knowing that picking C first would eventually force it to exit through D→T at cost 100.
+    - The algorithm has to try every order of visiting the relics and keep track of which one ends up being the cheapest overall.
+        """
 
-    TODO
-    """
-    return "TODO"
+    return answer
 
 
 # =============================================================================
