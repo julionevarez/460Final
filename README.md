@@ -34,8 +34,8 @@
 
 | Source Node Type | Why it is a source |
 |-------------------|-------------------------------------------------------------------------|
-| Entrance Node 'S' | We always begin at S so we need the cost of getting from S to any relic. |
-| Relic Node        | Once we collect a relic we need to know the cheapest way to reach the next one from that location. |
+| Entrance/Spawn Node 'S' | We always begin at S so we need the cost of getting from S to any relic. |
+| Relic Node 'm' | Once we collect a relic we need to know the cheapest way to reach the next one from that location. |
 
 ### Part 2b: Distance Storage
 
@@ -43,20 +43,20 @@
 
 | Property | Your answer |
 |----------|-------------|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | Nested Dictionary/Dictionary of dictonaries |
+| What the keys represent | The starting node that we are running Dijkstras from |
+| What the values represent | Another dictionary of all the shortest distances from that source node to all other nodes|
+| Lookup time complexity | O(1) since we are just looking up a key in a dictionary |
+| Why O(1) lookup is possible | Because dictionaries are hash tables and whether searching, adding or deleting items, these all average O(1) |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** Spawn = 1 run + each k relic to visit. k + 1 runs  
+- **Cost per run:** O(m log n) per run where m is edges and n is nodes
+- **Total complexity:** O(kmlog n) since we run dijkstra k + 1 times and each run costs O(mlog n)
+- **Justification (one line):** We run dijkstra once per source node and each run touches every edge once through the priority queue
 
 ---
 

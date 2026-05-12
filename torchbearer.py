@@ -105,7 +105,7 @@ def run_dijkstra(graph, source):
         if currentNode in visitedNodes:
             continue
         
-        # mark this node as finalized, we found the cheapest path to it
+        # now we mark this node as finalized since we found the cheapest path to it
         visitedNodes.add(currentNode)
         
         # check all the neighbors of the current node
@@ -137,9 +137,20 @@ def precompute_distances(graph, spawn, relics, exit_node):
         Nested structure supporting dist_table[u][v] lookups
         for every source u your design requires.
 
-    TODO
+    
     """
-    pass
+    # first need to declare a list of the source nodes we need to run Dijkstra's from as well as a table to hold the distances computed
+    sourceNodes = select_sources(spawn, relics, exit_node)
+    distanceTable = {}
+
+    # for loop to run Dijkstra's from each source node and fill the distance table with the results
+    for source in sourceNodes:
+        pathsFromSource = run_dijkstra(graph, source)   # variable to hold the result from Dijkstras for this source node
+        distanceTable[source] = pathsFromSource         # store the distance from this source to every other node in the table for easy lookup later
+    
+    return distanceTable
+
+    
 
 
 # =============================================================================

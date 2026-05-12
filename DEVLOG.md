@@ -23,12 +23,12 @@ I am planning to test as I go using the provided tests and work through the give
 
 ---
 
-## Entry 2 – []: [Short description]
+## Entry 2 – [5/11/2026]: Part 1 and 2 Check-in
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+Finished implementing Part 1 and 2. While I was going through the functions in torchbearer, I was confused at first as I saw exit_node as a parameter for select_sources and precompute_distances and was stuck on thinking where it plays a role in this/how to implement it and then realized that we don't need to do anything with it as its always just going to be an exit node, or in other words, a dead-end node with no path to take. 
 
 ---
 
