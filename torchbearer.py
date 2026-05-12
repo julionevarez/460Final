@@ -118,6 +118,8 @@ def run_dijkstra(graph, source):
                 pathCosts[neighbor] = newCost
                 # add the neighbor to the queue with its updated cost so we can explore it later
                 heapq.heappush(pq, (newCost, neighbor))
+
+                # process continues until we have finalized the shortest path to every reachable node, at which point the queue will be empty and we can return our results
     
     return pathCosts
 
@@ -165,9 +167,29 @@ def dijkstra_invariant_check():
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
 
-    TODO
+    
     """
-    return "TODO"
+
+    answer = """
+    - **For nodes already finalized (in S):**
+        When a node gets finalized we are done with it. The distance we have recorded for it is the real shortest path and nothing can make it shorter at this point.
+
+    - **For nodes not yet finalized (not in S):**
+        Nodes that havent been finalized yet have a distance that is just our best estimate so far. As we keep exploring we might find a cheaper way to reach them and update their distance.
+
+    - **Initialization : why the invariant holds before iteration 1:**
+        The only distance we know for sure is that the source is 0 steps away from itself. Everything else is infinity since we havent explored anything yet.
+
+    - **Maintenance : why finalizing the min-dist node is always correct:**
+        Given that our edge weights are all nonnegative there is no way to find a shorter path to it in the future. Any future path to this node would have to pass through nodes with equal or greater distance, so the current minimum cannot be beaten.
+
+    - **Termination : what the invariant guarantees when the algorithm ends:**
+        Every node that has a valid path has its correct shortest distance and any node still sitting at infinity just means there was no path to it from the source.
+
+    If the invariant did not hold it would mean the precomputed distances are wrong, the route planner would make decisions based on incorrect costs and could end up picking a suboptimal or invalid route.
+    """
+
+    return answer
 
 
 # =============================================================================

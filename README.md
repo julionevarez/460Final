@@ -71,29 +71,31 @@
 > Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  When a node gets finalized we are done with it. The distance we have recorded for it is the real shortest path and nothing can make it shorter at this point.
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  Nodes that havent been finalized yet have a distance that is just our best estimate so far. As we keep exploring we might find a cheaper way to reach them and update their distance.
 
 ### Part 3b: Why Each Phase Holds
 
 > One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  The only distance we know for sure is that the source is 0 steps away from itself. Everything else is infinity since we havent explored anything yet.
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  Given that our edge weights are all nonnegative there is no way to find a shorter path to it in the future.
+  
+  Any future path to this node would have to pass through nodes with equal or greater distance, so the current minimum cannot be beaten.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  Every node that has a valid path has its correct shortest distance and any node still sitting at infinity just means there was no path to it from the source.
 
 ### Part 3c: Why This Matters for the Route Planner
 
 > One sentence connecting correct distances to correct routing decisions.
 
-_Your answer here._
+  If the invariant did not hold it would mean the precomputed distances are wrong, the route planner would make decisions based on incorrect costs and could end up picking a suboptimal or invalid route.
 
 ---
 
