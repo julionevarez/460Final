@@ -32,9 +32,11 @@ Finished implementing Part 1 and 2. While I was going through the functions in t
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – [5/13/2026]: README DONE
 
-_Your entry here._
+Just finshed the README for the remaining parts, and I gotta say that I was kind of intimidated at the beginning when looking over the assignment and this being the final and all, but when the problem is layed out like this, and the specific questions that are being asked basically being a guide for us, it made it really easy to think through the problem logically which was really helpful. The pruning section took the most thought but I think I have a solid understanding of why it works now.
+
+Now, onto the the hard part for me, the coding.
 
 ---
 

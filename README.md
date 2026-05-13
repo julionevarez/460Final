@@ -128,10 +128,10 @@
 > Variable names here must match exactly what you use in torchbearer.py.
 
 | Component | Variable name in code | Data type | Description |
-|---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+|------------------|---|---|---|
+| Current location | currentNode | string | The node we are currently at.|
+| Relics already collected | relicsVisited | list | Stores the order that relics were collected in. |
+| Fuel cost so far | fuelSpent | float | running total of fuel spent so far. |
 
 ### Part 5b: Data Structure for Visited Relics
 
@@ -139,18 +139,18 @@
 
 | Property | Your answer |
 |----------|--------------|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Data structure chosen | set |
+| Operation: check if relic already collected | Time complexity: O(1)|
+| Operation: mark a relic as collected | Time complexity: O(1) |
+| Operation: unmark a relic (backtrack) | Time complexity: O(1) |
+| Why this structure fits | A set is the best fit because checking, adding and removing relics all happen constantly during backtracking and sets do all three in O(1) |
 
 ### Part 5c: Worst-Case Search Space
 
 > Two bullets.
 
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** The worst case is k! where k is the number of relics.
+- **Why:** There are k choices for the first relic, k-1 for the second, and so on. k * (k-1) * (k-2) * ...... * 1 = k!
 
 ---
 
@@ -160,23 +160,23 @@
 
 > Three bullets.
 
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** The best complete route found so far, stored as a list containing the minimum fuel cost and the relic visiting order that achieved it.
+- **When it is used:** It is checked at the start of each recursive call to see if the current path can still beat the best solution found so far
+- **What it allows the algorithm to skip:** We can skip any path that is already more expensive than our best solution since it can only get worse from there.
 
 ### Part 6b: Lower Bound Estimation
 
 > Three bullets.
 
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** We know what current node we are on, what relics are left and how much fuel we have spent
+- **What the lower bound accounts for:** It accounts for the cheapest way we could possibly finish from where we are then getting to the remaining relics and then eventually reaching the exit node T.
+- **Why it never overestimates:** Since we are using the shortest possible distances from the precomputed distance table, the lower bound can only be equal to or less than what the route will actually cost to finish.
 
 ### Part 6c: Pruning Correctness
 
 > One to two bullets. Explain why pruning is safe.
 
-- _Your answer here._
+- We only prune when we have already spent more fuel than our best so far complete route. Since fuel costs are always nonnegative we can never get cheaper from here, so we are not throwing away anything we might need.
 
 ---
 
@@ -184,4 +184,5 @@
 
 > Bullet list. If none beyond lecture notes, write that.
 
-- _Your references here._
+- lecture notes
+- https://www.youtube.com/watch?v=RtpJOGvfo7E&t=22s Backtracking Review
