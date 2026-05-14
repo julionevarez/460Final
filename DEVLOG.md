@@ -2,18 +2,9 @@
 
 **Student Name:** Julio Nevarez
 **Student ID:** 130817489
-
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
-
 ---
 
 ## Entry 1 – [5/10/2026]: Initial Plan
-
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
 
 Going to start with the Dijkstra implementation first since I already have a good understanding of how it works from class, but for the most part I am just going to follow the given structure and work on the README planning first and then the actual code implementation for its respective part.
 
@@ -24,9 +15,6 @@ I am planning to test as I go using the provided tests and work through the give
 ---
 
 ## Entry 2 – [5/11/2026]: Part 1 and 2 Check-in
-
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
 
 Finished implementing Part 1 and 2. While I was going through the functions in torchbearer, I was confused at first as I saw exit_node as a parameter for select_sources and precompute_distances and was stuck on thinking where it plays a role in this/how to implement it and then realized that we don't need to do anything with it as its always just going to be an exit node, or in other words, a dead-end node with no path to take. 
 
@@ -40,27 +28,22 @@ Now, onto the the hard part for me, the coding.
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – [5/13/2026]: Post-Implementation Reflection
 
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
-
-_Your entry here._
+Got everything working and all tests passing. Looking back I think the lower bound pruning could be improved. Right now it only estimates the minimum cost to the nearest relic and then to the exit, but i think a smarter way to go about the lower bound would be where is also accounts for all remaining relics, and this would mean it prunes more branches. The recursive search was definitely the hardest part like I expected, specifically making sure the backtracking was undoing the state correctly as I always get mixed up at times. Would also add more edge case testing given more time.
 
 ---
 
 ## Final Entry – [Date]: Time Estimate
 
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
-
 | Part | Estimated Hours |
 |---|---|
 | Part 1: Problem Analysis | 1 hour |
-| Part 2: Precomputation Design | |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | |
-| **Total** | |
+| Part 2: Precomputation Design |1-2 hours |
+| Part 3: Algorithm Correctness | 1-2 hours |
+| Part 4: Search Design | 1 hour |
+| Part 5: State and Search Space | 1 hour |
+| Part 6: Pruning | 2ish hours |
+| Part 7: Implementation | 4-6 hours |
+| README and DEVLOG writing | 1 hour |
+| **Total** | 11-12 hours |

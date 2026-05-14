@@ -5,16 +5,6 @@ The Torchbearer
 Student Name: Julio Nevarez
 Student ID:   130817489
 
-INSTRUCTIONS
-------------
-- Implement every function marked TODO.
-- Do not change any function signature.
-- Do not remove or rename required functions.
-- You may add helper functions.
-- Variable names in your code must match what you define in README Part 5a.
-- The pruning safety comment inside _explore() is graded. Do not skip it.
-
-Submit this file as: torchbearer.py
 """
 
 import heapq
@@ -44,19 +34,6 @@ def explain_problem():
 # =============================================================================
 
 def select_sources(spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    spawn : node
-    relics : list[node]
-    exit_node : node
-
-    Returns
-    -------
-    list[node]
-        No duplicates. Order does not matter.
-
-    """
     # start with spawn as the first source
     sourceList = [spawn]
     
@@ -69,20 +46,6 @@ def select_sources(spawn, relics, exit_node):
 
 
 def run_dijkstra(graph, source):
-    """
-    Parameters
-    ----------
-    graph : dict[node, list[tuple[node, int]]]
-        graph[u] = [(v, cost), ...]. All costs are nonnegative integers.
-    source : node
-
-    Returns
-    -------
-    dict[node, float]
-        Minimum cost from source to every node in graph.
-        Unreachable nodes map to float('inf').
-
-    """
     # set every node's distance to infinity since we haven't found a path to any of them yet
     pathCosts = {node: float('inf') for node in graph}
     
@@ -125,22 +88,6 @@ def run_dijkstra(graph, source):
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    graph : dict[node, list[tuple[node, int]]]
-    spawn : node
-    relics : list[node]
-    exit_node : node
-
-    Returns
-    -------
-    dict[node, dict[node, float]]
-        Nested structure supporting dist_table[u][v] lookups
-        for every source u your design requires.
-
-    
-    """
     # first need to declare a list of the source nodes we need to run Dijkstra's from as well as a table to hold the distances computed
     sourceNodes = select_sources(spawn, relics, exit_node)
     distanceTable = {}
@@ -204,24 +151,6 @@ def explain_search():
 # =============================================================================
 
 def find_optimal_route(dist_table, spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    dist_table : dict[node, dict[node, float]]
-        Output of precompute_distances.
-    spawn : node
-    relics : list[node]
-        Every node in this list must be visited at least once.
-    exit_node : node
-        The route must end here.
-
-    Returns
-    -------
-    tuple[float, list[node]]
-        (minimum_fuel_cost, ordered_relic_list)
-        Returns (float('inf'), []) if no valid route exists.
-
-    """
     bestCost = float('inf')
     bestOrder = []
     best = [bestCost, bestOrder]
@@ -238,33 +167,6 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
              cost_so_far, exit_node, best):
-    """
-    Recursive helper for find_optimal_route.
-
-    Parameters
-    ----------
-    dist_table : dict[node, dict[node, float]]
-    current_loc : node
-    relics_remaining : collection
-        Your chosen data structure from README Part 5b.
-    relics_visited_order : list[node]
-    cost_so_far : float
-    exit_node : node
-    best : list
-        Mutable container for the best solution found so far.
-
-    Returns
-    -------
-    None
-        Updates best in place.
-
-    TODO
-    Implement: base case, pruning, recursive case, backtracking.
-
-    REQUIRED: Add a 1-2 sentence comment near your pruning condition
-    explaining why it is safe (cannot skip the optimal solution).
-    This comment is graded.
-    """
     # set up local variables from README
     currentNode = current_loc
     relicsVisited = relics_visited_order
@@ -314,22 +216,6 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
 # =============================================================================
 
 def solve(graph, spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    graph : dict[node, list[tuple[node, int]]]
-    spawn : node
-    relics : list[node]
-    exit_node : node
-
-    Returns
-    -------
-    tuple[float, list[node]]
-        (minimum_fuel_cost, ordered_relic_list)
-        Returns (float('inf'), []) if no valid route exists.
-
-    TODO
-    """
     # first need to hold all the distances given from precomputing them from running dijkstras
     distanceTable = precompute_distances(graph, spawn, relics, exit_node)
     
