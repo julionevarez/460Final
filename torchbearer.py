@@ -221,9 +221,19 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
     """
-    pass
+    bestCost = float('inf')
+    bestOrder = []
+    best = [bestCost, bestOrder]
+    
+    # all relics need to be visited at least once, so we can start with a set of all the relics that we need to visit and remove them as we go
+    relicsRemaining = set(relics)
+    
+    # call the helper function to explore all possible orders of visiting the relics and keep track of the best one found
+    _explore(dist_table, spawn, relicsRemaining, [], 0, exit_node, best)
+    
+    # after exploring all possibilities, best should hold the cheapest cost and the order of relics that produces it
+    return (best[0], best[1])
 
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
@@ -255,7 +265,48 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    # set up local variables from README
+    currentNode = current_loc
+    relicsVisited = relics_visited_order
+    fuelSpent = cost_so_far
+
+    # We only prune when we have already spent more fuel than our best so far complete route. Since fuel costs are always nonnegative we can never get cheaper from here, so we are not throwing away anything we might need.
+    if fuelSpent >= best[0]:
+        return
+
+    # base case first, if we have visited all the relics we just need to head to the exit and see if this route is better than our best so far
+    if not relics_remaining:
+        costToExit = dist_table[currentNode][exit_node]
+        totalCost = fuelSpent + costToExit
+        if totalCost < best[0]:
+            best[0] = totalCost
+            best[1] = list(relicsVisited)
+        return
+
+    # lower bound math to make our pruning more efficient
+    minToNextRelic = min(dist_table[currentNode][r] for r in relics_remaining)
+    # cheapest cost from any remaining relic to exit
+    minToExit = min(dist_table[r][exit_node] for r in relics_remaining)
+    lowerBound = minToNextRelic + minToExit
+
+    # we should be prune even if the best possible outcome from here is just equal to our best so far
+    if fuelSpent + lowerBound >= best[0]:
+        return
+
+    # try visiting each remaining relic
+    for relic in list(relics_remaining):
+        pathCost = dist_table[currentNode][relic]
+        if pathCost == float('inf'):
+            continue
+        relics_remaining.remove(relic)
+        relicsVisited.append(relic)
+        _explore(dist_table, relic, relics_remaining, relicsVisited,
+                 fuelSpent + pathCost, exit_node, best)
+        relics_remaining.add(relic)
+        relicsVisited.pop()
+
+    # by this point we have tried visiting each remaining relic and explored all the routes that come from those choices, so we backtrack to let the caller try different options as well
+
 
 
 # =============================================================================
@@ -279,7 +330,17 @@ def solve(graph, spawn, relics, exit_node):
 
     TODO
     """
-    pass
+    # first need to hold all the distances given from precomputing them from running dijkstras
+    distanceTable = precompute_distances(graph, spawn, relics, exit_node)
+    
+    # then need to hold the optimal route
+    optimalRoute = find_optimal_route(distanceTable, spawn, relics, exit_node)
+    
+    # edge case check to make sure we return the correct output if there is no valid route to the exit
+    if optimalRoute[0] == float('inf'):
+        return (float('inf'), [])
+    
+    return optimalRoute
 
 
 # =============================================================================
